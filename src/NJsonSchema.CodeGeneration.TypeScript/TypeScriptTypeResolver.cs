@@ -175,5 +175,48 @@ namespace NJsonSchema.CodeGeneration.TypeScript
 
             return "any[]";
         }
+
+        /// <summary>Manages the generated types and converts JSON types to TypeScript types. </summary>
+        public bool IsComplexType(JsonSchema4 schema, string typeNameHint, bool addInterfacePrefix)
+        {
+            if (schema == null)
+                throw new ArgumentNullException(nameof(schema));
+
+            schema = schema.ActualSchema;
+
+            if (schema.IsAnyType)
+                return false;
+
+            var type = schema.Type;
+            if (type == JsonObjectType.None && schema.IsEnumeration)
+            {
+                type = schema.Enumeration.All(v => v is int) ?
+                    JsonObjectType.Integer :
+                    JsonObjectType.String;
+            }
+
+            if (type.HasFlag(JsonObjectType.Array))
+                return false;
+
+            if (type.HasFlag(JsonObjectType.Number))
+                return false;
+
+            if (type.HasFlag(JsonObjectType.Integer))
+                return false;
+
+            if (type.HasFlag(JsonObjectType.Boolean))
+                return false;
+
+            if (type.HasFlag(JsonObjectType.String))
+                return false;
+
+            if (type.HasFlag(JsonObjectType.File))
+                return false;
+
+            if (schema.IsDictionary)
+                return false;
+
+            return true;
+        }
     }
 }

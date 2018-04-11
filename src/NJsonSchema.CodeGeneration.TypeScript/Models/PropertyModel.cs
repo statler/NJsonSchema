@@ -109,11 +109,15 @@ namespace NJsonSchema.CodeGeneration.TypeScript.Models
         /// <summary>Gets a value indicating whether the property is optional.</summary>
         public bool IsOptional => !_property.IsRequired && _settings.MarkOptionalProperties;
 
+        /// <summary>Gets a value indicating whether the property is required.</summary>
+        public bool IsRequired => _property.IsRequired;
+
         /// <summary>Gets a value indicating whether the property is nullable.</summary>
         public bool IsNullable => _property.IsNullable(_settings.SchemaType);
 
         /// <summary>Gets a value indicating whether the property is an inheritance discriminator.</summary>
         public bool IsDiscriminator => _property.IsInheritanceDiscriminator;
+
 
         /// <summary>Gets the convert to class code.</summary>
         public string ConvertToClassCode
@@ -165,5 +169,34 @@ namespace NJsonSchema.CodeGeneration.TypeScript.Models
                 return string.Empty;
             }
         }
+
+        /// <summary>
+        /// Adds a reference to the interface constructor
+        /// </summary>
+
+        public string ReferencedConstructorInterfaceType
+        {
+            get {
+                ReferenceModel rm = new ReferenceModel(this);
+                return !SupportsConstructorConversion ? ConstructorInterfaceType : $"{rm.ReferenceName}.{ ConstructorInterfaceType}"; }
+        }
+
+        /// <summary>
+        /// Adds a reference to the class type
+        /// </summary>
+        public string ReferencedClassType
+        {
+            get
+            {
+                ReferenceModel rm = new ReferenceModel(this);
+                return !SupportsConstructorConversion ? Type : $"{rm.ReferenceName}.{Type}";
+            }
+        }
+
+        /// <summary>Gets a value indicating whether the property is a primitive type (or string).</summary>
+        public bool IsPrimitive => !SupportsConstructorConversion;
+
+        /// <summary>Gets a value indicating whether the property is a primitive type (or string).</summary>
+        public bool IsComplex => SupportsConstructorConversion;
     }
 }

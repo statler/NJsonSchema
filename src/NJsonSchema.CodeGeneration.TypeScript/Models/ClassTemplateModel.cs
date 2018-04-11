@@ -122,6 +122,10 @@ namespace NJsonSchema.CodeGeneration.TypeScript.Models
             .Where(v => v.IsInheritanceDiscriminator == false)
             .Select(property => new PropertyModel(this, property, ClassName, _resolver, _settings)).ToList();
 
+        /// <summary>Gets the property models.</summary>
+        public List<ReferenceModel> References => Properties
+            .Where(v => v.SupportsConstructorConversion == true).Select(x => new ReferenceModel(x)).ToList();
+
         /// <summary>Gets a value indicating whether any property has a default value.</summary>
         public bool HasDefaultValues => Properties.Any(p => p.HasDefaultValue);
 
@@ -130,5 +134,17 @@ namespace NJsonSchema.CodeGeneration.TypeScript.Models
 
         /// <summary>Gets the inherited schema.</summary>
         private JsonSchema4 InheritedSchema => _schema.InheritedSchema?.ActualSchema;
+
+        /// <summary>Gets a value indicating whether has a required balue </summary>
+        public bool HasRequiredValue => Properties.Any(p => p.IsRequired);
+
+        /// <summary>Gets a value indicating whether has a required balue </summary>
+        public PropertyModel FirstRequiredValue => Properties.FirstOrDefault(p => p.IsRequired);
+
+        /// <summary>Gets then non-primitive / non-string types</summary>
+        public List<PropertyModel> Properties_Complex => Properties.Where(v => !v.IsPrimitive).ToList();
+
+        /// <summary>Gets then primitive types (or string)</summary>
+        public List<PropertyModel> Properties_Primitive => Properties.Where(v => v.IsPrimitive).ToList();
     }
 }

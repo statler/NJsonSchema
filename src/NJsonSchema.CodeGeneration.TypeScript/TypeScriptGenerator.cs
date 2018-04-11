@@ -50,7 +50,8 @@ namespace NJsonSchema.CodeGeneration.TypeScript
         /// <returns>The code.</returns>
         public override CodeArtifactCollection GenerateTypes()
         {
-            return GenerateTypes(new TypeScriptExtensionCode(Settings.ExtensionCode, Settings.ExtendedClasses));
+            var a = GenerateTypes(new TypeScriptExtensionCode(Settings.ExtensionCode, Settings.ExtendedClasses));
+            return a;
         }
 
         /// <summary>Generates all types from the resolver with the given extension code.</summary>

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.3;net451</TargetFrameworks>
+    <TargetFrameworks>net47</TargetFrameworks>
     <Description>JSON Schema reader, generator and validator for .NET</Description>
     <Version>9.10.42</Version>
     <PackageTags>json schema validation generator .net</PackageTags>
@@ -19,7 +19,13 @@
   </PropertyGroup>
   <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Templates\KnockoutClass - Copy.liquid" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Templates\Class.liquid" />
     <EmbeddedResource Include="Templates\ConvertToClass.liquid" />
@@ -28,16 +34,17 @@
     <EmbeddedResource Include="Templates\File.FormatDate.liquid" />
     <EmbeddedResource Include="Templates\File.liquid" />
     <EmbeddedResource Include="Templates\Interface.liquid" />
+    <EmbeddedResource Include="Templates\KnockoutClass - Copy.liquid" />
     <EmbeddedResource Include="Templates\KnockoutClass.liquid" />
     <EmbeddedResource Include="Templates\File.ReferenceHandling.liquid" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="NSwag.CodeGeneration" Version="11.17.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NJsonSchema.CodeGeneration\NJsonSchema.CodeGeneration.csproj" />
-    <ProjectReference Include="..\NJsonSchema\NJsonSchema.csproj" />
+    <ProjectReference Include="..\..\..\NSwag\src\NSwag.CodeGeneration\NSwag.CodeGeneration.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
