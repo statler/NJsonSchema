@@ -124,7 +124,7 @@ namespace NJsonSchema.CodeGeneration.TypeScript.Models
 
         /// <summary>Gets the property models.</summary>
         public List<ReferenceModel> References => Properties
-            .Where(v => v.SupportsConstructorConversion == true).Select(x => new ReferenceModel(x)).ToList();
+            .Where(v => v.SupportsConstructorConversion == true).Select(x => x.Type.Replace("[", "").Replace("]", "")).Distinct().Select(x=> new ReferenceModel(x)).ToList(); 
 
         /// <summary>Gets a value indicating whether any property has a default value.</summary>
         public bool HasDefaultValues => Properties.Any(p => p.HasDefaultValue);

@@ -24,7 +24,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Templates\KnockoutClass - Copy.liquid" />
+    <None Remove="Templates\KnockoutClass - Original.liquid" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Templates\Class.liquid" />
@@ -34,7 +34,7 @@
     <EmbeddedResource Include="Templates\File.FormatDate.liquid" />
     <EmbeddedResource Include="Templates\File.liquid" />
     <EmbeddedResource Include="Templates\Interface.liquid" />
-    <EmbeddedResource Include="Templates\KnockoutClass - Copy.liquid" />
+    <EmbeddedResource Include="Templates\KnockoutClass - Original.liquid" />
     <EmbeddedResource Include="Templates\KnockoutClass.liquid" />
     <EmbeddedResource Include="Templates\File.ReferenceHandling.liquid" />
   </ItemGroup>
@@ -42,9 +42,6 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     <PackageReference Include="NSwag.CodeGeneration" Version="11.17.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\NSwag\src\NSwag.CodeGeneration\NSwag.CodeGeneration.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />

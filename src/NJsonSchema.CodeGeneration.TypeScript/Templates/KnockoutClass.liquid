@@ -29,7 +29,7 @@ export class {{ ClassName }}{{ Inheritance }} {
 {%     if property.HasDescription -%}
     /** {{ property.Description }} */
 {%     endif -%}
-    {% if property.IsReadOnly %}readonly {% endif %}{{ property.PropertyName }} = {% if property.IsArray %}ko.observableArray<{{ property.ArrayItemType }}>({% if property.HasDefaultValue %}{{ property.DefaultValue }}{% endif %}){% else %}ko.observable<{{ property.ReferencedClassType }}>(){% endif %};
+    {% if property.IsReadOnly %}readonly {% endif %}{{ property.NewPropertyName }} = {% if property.IsArray %}ko.observableArray<{{ property.ArrayItemType }}>({% if property.HasDefaultValue %}{{ property.DefaultValue }}{% endif %}){% else %}ko.observable<{{ property.ReferencedClassType }}>(){% endif %};
 {% endfor -%}
 
 {% if HasDiscriminator -%}
@@ -60,33 +60,32 @@ export class {{ ClassName }}{{ Inheritance }} {
         return <I{{ ClassName }}{{ InterfaceInheritance }}> {
 {% assign iterLimit = Properties_Primitive.size | minus: 1 -%}
 {% for property in Properties_Primitive limit: iterLimit -%}
-        {{ property.PropertyName }} : this.{{ property.PropertyName }}(),
+        {{ property.PropertyName }} : this.{{ property.NewPropertyName }}(),
 {% endfor -%}
-        {{ Properties_Primitive.last.PropertyName }} : this.{{ Properties_Primitive.last.PropertyName }}()
+        {{ Properties_Primitive.last.PropertyName }} : this.{{ Properties_Primitive.last.NewPropertyName }}()
         }
     }
 
-    fromJS(data: I{{ ClassName }}): {
+    fromJS(data: I{{ ClassName }}) {
         if (!data) return;
 {% for property in Properties_Primitive -%}
-        this.{{ property.PropertyName }}(data.{{ property.PropertyName }});
+        this.{{ property.NewPropertyName }}(data.{{ property.PropertyName }});
 {% endfor -%}
 {% for property in Properties_Complex -%}
 {%      if property.IsArray %}
         if (data.{{ property.PropertyName }} && data.{{ property.PropertyName }}.constructor === Array) {
-            {{ property.PropertyName }}_ = [];
             for (let item of data.{{ property.PropertyName }})
-                {{ property.PropertyName }}_.push({{ property.ReferencedClassType }}.fromJS(item));
+                {{ property.NewPropertyName }}.push({{ property.ReferencedClassType }}.fromJS(item));
         }
 {%      else -%}
-        if (data.{{ property.PropertyName }}) this.{{ property.PropertyName }}(new {{ property.ReferencedClassType }}(data.{{ property.PropertyName }}));
+        if (data.{{ property.PropertyName }}) this.{{ property.NewPropertyName }}(new {{ property.ReferencedClassType }}(data.{{ property.PropertyName }}));
 {%      endif -%}
 {% endfor -%}
     }
 
     	clear() {
 {% for property in Properties -%}
-        this.{{ property.PropertyName }}(undefined);
+        this.{{ property.NewPropertyName }}(undefined);
 {% endfor -%}
 	}
 

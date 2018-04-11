@@ -74,7 +74,7 @@ namespace NJsonSchema.CodeGeneration.TypeScript.Models
                         _property.ActualTypeSchema?.AdditionalPropertiesSchema.ActualSchema.Type.HasFlag(JsonObjectType.Object) == true;
                 }
 
-                return _resolver.SupportsConstructorConversion(_property.ActualTypeSchema) && 
+                return _resolver.SupportsConstructorConversion(_property.ActualTypeSchema) &&
                     !_property.ActualTypeSchema.IsTuple;
             }
         }
@@ -117,7 +117,6 @@ namespace NJsonSchema.CodeGeneration.TypeScript.Models
 
         /// <summary>Gets a value indicating whether the property is an inheritance discriminator.</summary>
         public bool IsDiscriminator => _property.IsInheritanceDiscriminator;
-
 
         /// <summary>Gets the convert to class code.</summary>
         public string ConvertToClassCode
@@ -176,9 +175,11 @@ namespace NJsonSchema.CodeGeneration.TypeScript.Models
 
         public string ReferencedConstructorInterfaceType
         {
-            get {
-                ReferenceModel rm = new ReferenceModel(this);
-                return !SupportsConstructorConversion ? ConstructorInterfaceType : $"{rm.ReferenceName}.{ ConstructorInterfaceType}"; }
+            get
+            {
+                ReferenceModel rm = new ReferenceModel(Type.Replace("[", "").Replace("]", ""));
+                return !SupportsConstructorConversion ? ConstructorInterfaceType : $"{rm.ReferenceName}.{ ConstructorInterfaceType}";
+            }
         }
 
         /// <summary>
@@ -188,7 +189,7 @@ namespace NJsonSchema.CodeGeneration.TypeScript.Models
         {
             get
             {
-                ReferenceModel rm = new ReferenceModel(this);
+                ReferenceModel rm = new ReferenceModel(Type.Replace("[", "").Replace("]", ""));
                 return !SupportsConstructorConversion ? Type : $"{rm.ReferenceName}.{Type}";
             }
         }
@@ -198,5 +199,10 @@ namespace NJsonSchema.CodeGeneration.TypeScript.Models
 
         /// <summary>Gets a value indicating whether the property is a primitive type (or string).</summary>
         public bool IsComplex => SupportsConstructorConversion;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string NewPropertyName => RenamePropertyFactory.getNewPropertyName(_parentTypeName, PropertyName);
     }
 }

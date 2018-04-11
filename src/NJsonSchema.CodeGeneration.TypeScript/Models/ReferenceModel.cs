@@ -39,10 +39,10 @@ namespace NJsonSchema.CodeGeneration.TypeScript.Models
         /// <summary>
         /// Init with property
         /// </summary>
-        /// <param name="property"></param>
-        public ReferenceModel(PropertyModel property)
+        /// <param name="PropertyName"></param>
+        public ReferenceModel(string PropertyName)
         {
-            BaseName = property.Type.Replace("[","").Replace("]", "");
+            BaseName = PropertyName;
         }
     }
 }
