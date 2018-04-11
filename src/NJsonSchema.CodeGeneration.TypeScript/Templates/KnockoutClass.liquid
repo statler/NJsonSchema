@@ -29,7 +29,7 @@ export class {{ ClassName }}{{ Inheritance }} {
 {%     if property.HasDescription -%}
     /** {{ property.Description }} */
 {%     endif -%}
-    {% if property.IsReadOnly %}readonly {% endif %}{{ property.NewPropertyName }} = {% if property.IsArray %}ko.observableArray<{{ property.ArrayItemType }}>({% if property.HasDefaultValue %}{{ property.DefaultValue }}{% endif %}){% else %}ko.observable<{{ property.ReferencedClassType }}>(){% endif %};
+    {% if property.IsReadOnly %}readonly {% endif %}{{ property.NewPropertyName }} = {% if property.IsArray %}ko.observableArray<{{ property.ReferencedArrayItemType }}>({% if property.HasDefaultValue %}{{ property.DefaultValue }}{% endif %}){% else %}ko.observable<{{ property.ReferencedClassType }}>(){% endif %};
 {% endfor -%}
 
 {% if HasDiscriminator -%}
@@ -75,7 +75,7 @@ export class {{ ClassName }}{{ Inheritance }} {
 {%      if property.IsArray %}
         if (data.{{ property.PropertyName }} && data.{{ property.PropertyName }}.constructor === Array) {
             for (let item of data.{{ property.PropertyName }})
-                {{ property.NewPropertyName }}.push({{ property.ReferencedClassType }}.fromJS(item));
+                this.{{ property.NewPropertyName }}.push(new {{ property.ReferencedArrayItemType }}(item));
         }
 {%      else -%}
         if (data.{{ property.PropertyName }}) this.{{ property.NewPropertyName }}(new {{ property.ReferencedClassType }}(data.{{ property.PropertyName }}));

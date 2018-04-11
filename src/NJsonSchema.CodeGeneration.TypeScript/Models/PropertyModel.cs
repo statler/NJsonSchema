@@ -170,6 +170,11 @@ namespace NJsonSchema.CodeGeneration.TypeScript.Models
         }
 
         /// <summary>
+        /// Gets the reference model for this property
+        /// </summary>
+        public ReferenceModel refModel => new ReferenceModel(Type.Replace("[", "").Replace("]", ""));
+
+        /// <summary>
         /// Adds a reference to the interface constructor
         /// </summary>
 
@@ -177,8 +182,7 @@ namespace NJsonSchema.CodeGeneration.TypeScript.Models
         {
             get
             {
-                ReferenceModel rm = new ReferenceModel(Type.Replace("[", "").Replace("]", ""));
-                return !SupportsConstructorConversion ? ConstructorInterfaceType : $"{rm.ReferenceName}.{ ConstructorInterfaceType}";
+                return !SupportsConstructorConversion ? ConstructorInterfaceType : $"{refModel.ReferenceName}.{ ConstructorInterfaceType}";
             }
         }
 
@@ -189,8 +193,18 @@ namespace NJsonSchema.CodeGeneration.TypeScript.Models
         {
             get
             {
-                ReferenceModel rm = new ReferenceModel(Type.Replace("[", "").Replace("]", ""));
-                return !SupportsConstructorConversion ? Type : $"{rm.ReferenceName}.{Type}";
+                return !SupportsConstructorConversion ? Type : $"{refModel.ReferenceName}.{Type}";
+            }
+        }
+
+        /// <summary>
+        /// Adds a reference to the array item type
+        /// </summary>
+        public string ReferencedArrayItemType
+        {
+            get
+            {
+                return !SupportsConstructorConversion ? ArrayItemType : $"{refModel.ReferenceName}.{ ArrayItemType}";
             }
         }
 

@@ -29,9 +29,11 @@ namespace NJsonSchema.CodeGeneration.TypeScript
         /// </summary>
         private static Dictionary<string, Dictionary<string, string>> DctRenames
         {
-            get {
+            get
+            {
                 if (dctRenames == null) populateRenames();
-                return dctRenames; }
+                return dctRenames;
+            }
         }
 
         static void populateRenames()
@@ -42,6 +44,7 @@ namespace NJsonSchema.CodeGeneration.TypeScript
                 {"LotItpdetailId", "LotItpDetailId"},
                 {"LotItpid", "LotItpId"},
                 {"Itpid", "ItpId"},
+                {"Ncrid", "NcrId"},
                 {"Ncrno", "NcrNo"},
                 {"IsAvloverride", "IsAvlOverride"}
             };
@@ -90,7 +93,27 @@ namespace NJsonSchema.CodeGeneration.TypeScript
                 {"ControlLine", "ControlLineId"},
                 {"RequestedBy", "RequestedById"},
                 {"TestRequestTo", "TestRequestToId"},
-                {"Daterequired", "DateRequired"}
+                {"Daterequired", "DateRequired"},
+                {"DepthtoTest", "DepthToTest"}
+            };
+            dctRenames["TestCoordinateViewModel"] = new Dictionary<string, string>()
+            {
+                {"Trid", "TestRequestId"},
+                {"Tr", "TestRequest"}
+            };
+            dctRenames["ApprovalViewModel"] = new Dictionary<string, string>()
+            {
+                {"Ncrlink", "NcrLinkId"},
+                {"LotItpdetailLink", "LotItpDetailLinkId"},
+                {"LotQtyLink", "LotQtyLinkId"},
+                {"LotAtplink", "LotAtpLinkId"},
+                {"PurchaseOrderLink", "PurchaseOrderLinkId"},
+                {"PurchaseOrderAcceptanceLink", "PurchaseOrderAcceptanceLinkId"},
+                {"CloseOutNcr", "CloseOutNcrId"},
+                {"CloseOutBy", "CloseOutById"},
+                {"ResponseBy", "ResponseById"},
+                {"CloseOutByNavigation", "CloseOutByUser"},
+                {"ResponseByNavigation", "ResponseByUser"}
             };
         }
 
