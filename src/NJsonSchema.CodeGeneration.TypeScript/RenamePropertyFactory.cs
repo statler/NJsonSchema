@@ -115,6 +115,53 @@ namespace NJsonSchema.CodeGeneration.TypeScript
                 {"CloseOutByNavigation", "CloseOutByUser"},
                 {"ResponseByNavigation", "ResponseByUser"}
             };
+            dctRenames["ApprovalRequestToViewModel"] = new Dictionary<string, string>()
+            {
+                {"RequestTo", "RequestToId"},
+                {"CctoEmail", "CcToEmail"},
+                {"RequestToNavigation", "RequestToUser"}
+            };
+            dctRenames["ApprovalRequestCcViewModel"] = new Dictionary<string, string>()
+            {
+                {"Ccto", "CctoId"},
+                {"CctoNavigation", "CcToUser"}
+            };
+            dctRenames["PurchaseOrderViewModel"] = new Dictionary<string, string>()
+            {
+                {"Poindex", "PoIndex"},
+                {"Ponumber", "PoNumber"},
+                {"Podate", "PoDate"},
+                {"Pocontact", "PoContactId"},
+                {"RaisedBy", "RaisedById"},
+                {"ApprovedBy", "ApprovedById"},
+                {"Pobudget", "PoBudget"},
+                {"Supplier", "SupplierId"},
+                {"SupplierConfirmationBy", "SupplierConfirmationById"},
+                {"ApprovedByNavigation", "ApprovedByUser"},
+                {"PocontactNavigation", "PoContactUsern"},
+                {"RaisedByNavigation", "RaisedByUser"},
+                {"SupplierConfirmationByNavigation", "SupplierConfirmationByUser"}
+            };
+            dctRenames["PurchaseOrderDtoViewModel"] = new Dictionary<string, string>()
+            {
+                {"Poindex", "PoIndex"},
+                {"Ponumber", "PoNumber"},
+                {"Podate", "PoDate"},
+                {"Pocontact", "PoContactId"},
+                {"RaisedBy", "RaisedById"},
+                {"ApprovedBy", "ApprovedById"},
+                {"Pobudget", "PoBudget"},
+                {"Supplier", "SupplierId"},
+                {"SupplierConfirmationBy", "SupplierConfirmationById"},
+                {"ApprovedByNavigation", "ApprovedByUser"},
+                {"PocontactNavigation", "PoContactUsern"},
+                {"RaisedByNavigation", "RaisedByUser"},
+                {"SupplierConfirmationByNavigation", "SupplierConfirmationByUser"}
+            };
+            dctRenames["PurchaseOrderDetailViewModel"] = new Dictionary<string, string>()
+            {
+                {"PodetailId", "PoDetailId"},
+            };
         }
 
     }

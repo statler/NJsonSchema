@@ -74,8 +74,10 @@ export class {{ ClassName }}{{ Inheritance }} {
 {% for property in Properties_Complex -%}
 {%      if property.IsArray %}
         if (data.{{ property.PropertyName }} && data.{{ property.PropertyName }}.constructor === Array) {
+            let _arr=[];
             for (let item of data.{{ property.PropertyName }})
-                this.{{ property.NewPropertyName }}.push(new {{ property.ReferencedArrayItemType }}(item));
+                _arr.push(new {{ property.ReferencedArrayItemType }}(item));
+            this.{{ property.NewPropertyName }}(_arr);
         }
 {%      else -%}
         if (data.{{ property.PropertyName }}) this.{{ property.NewPropertyName }}(new {{ property.ReferencedClassType }}(data.{{ property.PropertyName }}));
