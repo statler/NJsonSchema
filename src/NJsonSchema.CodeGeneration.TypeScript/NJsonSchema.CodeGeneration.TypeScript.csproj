@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net47</TargetFrameworks>
+    <TargetFrameworks>net472</TargetFrameworks>
     <Description>JSON Schema reader, generator and validator for .NET</Description>
     <Version>9.10.42</Version>
     <PackageTags>json schema validation generator .net</PackageTags>
